@@ -1,9 +1,11 @@
 <html>
   <head>
-    <title>Angular 2 QuickStart</title>
+    <title>Angular Mapbox GL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="stylesheet" href="app/components/app/app.component.css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="app/components/maps/mapbox-gl-map.component.css" media="screen" title="no title" charset="utf-8">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
     <!-- Polyfill(s) for older browsers -->
@@ -12,14 +14,19 @@
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/monokai-sublime.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
     <script>
-      System.import('app').catch(function(err){ console.error(err); });
+	
+	System.import('app').catch(function(err){ console.error(err); });
     </script>
   </head>
 
   <body>
     <my-app>Loading...</my-app>
+
   </body>
 </html>

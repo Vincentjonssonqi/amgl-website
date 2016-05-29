@@ -1,9 +1,201 @@
-<angular-mapbox-gl
-	[styleTokenUrl]="mapStyleToken"
+
+<div id="container">
+
+
+<mapbox-gl-map
+	class="item"
+	[style]="mapStyleToken"
 	[center]="mapPosition.center"
 	[bearing]="mapPosition.bearing"
 	[pitch]="mapPosition.pitch"
-	[zoom]="mapPosition.zoom">
+	[zoom]="mapPosition.zoom"
+	(mbclick)="events.click($event)"
+	(mbzoomend)="events.zoomend($event)"
+	>
 
-</angular-mapbox-gl>
-<h1>{{mapStyleToken}}</h1>
+</mapbox-gl-map>
+<div id="tutorial" class="item" (scroll)="didScrollContent($event.srcElement.scrollTop)">
+
+	<div class="card">
+		<h1>Angular Mapbox GL</h1>
+		<h2>Setup</h2>
+		<ul>
+			<li><a href="#">Import Mapbox GL</a></li>
+			<li><a href="#">Access Token</a></li>
+		</ul>
+		<h2>Components</h2>
+		<ul>
+			<li>
+				<a href="#">mapbox-gl-map</a>
+				<ul>
+					<li><a href="#">Style</a></li>
+					<li><a href="#">Language</a></li>
+					<li><a href="#">Positioning</a></li>
+					<li><a href="#">Animation</a></li>
+					<li><a href="#">Events</a></li>
+				</ul>
+			</li>
+			<li><a href="#">mapbox-gl-marker</a></li>
+			<li><a href="#">mapbox-gl-markers</a></li>
+			<li><a href="#">mapbox-gl-polyline</a></li>
+			<li><a href="#">mapbox-gl-polylines</a></li>
+			<li><a href="#">mapbox-gl-polygon</a></li>
+			<li><a href="#">mapbox-gl-polylines</a></li>
+		</ul>
+		<h3>Directives</h3>
+		<ul>
+
+		</ul>
+	</div>
+
+
+
+
+
+	<div class="card">
+		<h1>Setup</h1>
+		<h2>Import Mapbox GL</h2>
+		<p>The first step is to import the Mapbox GL library. You can do it how ever you like but if you want to get up and running quickly paste the follwoing code into your head tag in index.html</p>
+
+		<pre><code highlight class="html">
+			&lt;script src='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'&gt;&lt;/script&gt;
+			&lt;link href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' /&gt;
+		</code>
+
+		</pre>
+
+		<h2>Access Token</h2>
+		<p>Before you start playing with some maps you have to tell mapboxgl to use your <b>accessToken</b></p>
+		<p>
+			Note! If you do not have an access token then you need to head over to <a href="https://www.mapbox.com/">mapbox.com</a>, create an account and get your own token from your account page.
+		</p>
+		<pre>
+			<code highlight class="javascript">
+		//Switch out this fake accessToken against yours
+		mapboxgl.accessToken = "pk.ertv345avewrva4bnNzb26haSIsImEiOiJIVVByOWJnIn0.Dq2xmRfgss5sergserga4ta23";
+		</code>
+		</pre>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="card">
+		<h1>Components</h1>
+		<h2>&lt;mapbox-gl-map&gt;</h2>
+
+		<p>
+			This is the root component, you will change position, style, transition parameters as well as hooking up to the map objects different events using this component.
+		</p>
+		<section>
+		<h3>Styling</h3>
+		<pre><code highlight class="html">
+			&lt;mapbox-gl-map
+				[style]="Mapbox styleURL String (can be found on your mapbox developer page)"&gt;
+			&lt;/mapbox-gl-map&gt;
+			</code>
+		</pre>
+		<p>You can use Mapbox style urls to make your map look pretty.</p>
+		</section>
+		<section>
+		<h3>Language</h3>
+		<pre><code highlight class="html">
+			&lt;mapbox-gl-map
+				[language]="Language Id String"&gt;
+			&lt;/mapbox-gl-map&gt;
+			</code>
+		</pre>
+		<p>If you want to change the maps language you can do so by modifying the language property.</p>
+		<p>Supported Language IDs:</p>
+		<ul>
+			<li><b>fr</b> (French)</li>
+			<li><b>ru</b> (Russian)</li>
+			<li><b>de</b> (German)</li>
+			<li><b>es</b> (Spanish)</li>
+		</ul>
+		</section>
+		<section>
+		<h3>Positioning</h3>
+		<pre><code highlight class="html">
+			&lt;mapbox-gl-map
+				[center]="accepts an array like this [lat,lng]"
+				[bearing]="Number between 0 to 360"
+				[pitch]="Number between -180 to 180"
+				[zoom]="Number between 0 to 22"&gt;
+			&lt;/mapbox-gl-map&gt;
+			</code>
+		</pre>
+		<p>These values control the cameras position. Mapbox gl supports zooming, tilting(pitch), rotating(bearing) as well as setting the cameras position in longitude and latitude.</p>
+		<p>
+			By default the when these properties change the map will automatically reposition the camera to fit your constraints.
+		</p>
+	</section>
+	<section>
+
+		<h3>Animation</h3>
+		<pre><code highlight class="html">
+			&lt;mapbox-gl-map
+				[animate]="Bool, tells mapbox if it should animate between positions."
+				[duration]="Number, the duration of the transition animation in seconds"
+				[speed]="Number, the speed of the animation default 1.2"
+				[curve]="Number, the amount of zooming that will happen during the animation"&gt;
+			&lt;/mapbox-gl-map&gt;
+			</code>
+		</pre>
+
+		<p>These parameters tell mapbox how changes in the position properties should be animated. The curve and speed props can be a little harder to understand so to read more <a href="https://www.mapbox.com/mapbox-gl-js/api/#Map#flyTo">click here</a></p>
+		</section>
+		<section>
+
+			<h3>Events</h3>
+			<pre><code highlight class="html">
+				&lt;mapbox-gl-map
+					on-webglcontextlost="function(eventData)"
+					on-webglcontextrestored="function(eventData)"
+					on-render="function(eventData)"
+					on-move="function(eventData)"
+					on-touchcancel="function(eventData)"
+					on-touchmove="function(eventData)"
+					on-touchend="function(eventData)"
+					on-touchstart="function(eventData)"
+					on-mousemove="function(eventData)"
+					on-movestart="function(eventData)"
+					on-moveend="function(eventData)"
+					on-mousedown="function(eventData)"
+					on-mouseup="function(eventData)"
+					on-load="function(eventData)"
+					on-contextmenu="function(eventData)"
+					on-dblclick="function(eventData)"
+					on-click="function(eventData)"
+					on-zooming="function(eventData)"
+					on-zoomend="function(eventData)"
+					on-zoomstart="function(eventData)"
+					on-boxzoomstart="function(eventData)"
+					on-boxzoomend="function(eventData)"
+					on-boxzoomcancel="function(eventData)"
+					on-rotatestart="function(eventData)"
+					on-rotateend="function(eventData)"
+					on-rotate="function(eventData)"
+					on-dragstart="function(eventData)"
+					on-drag="function(eventData)"
+					on-dragend="function(eventData)"
+					on-pitched="function(eventData)"
+					&gt;
+				&lt;/mapbox-gl-map&gt;
+				</code>
+			</pre>
+			<p>
+				This library supports all the events found in the original mapbox-gl library. If you are wondering about the eventData object you can find out more by <a href="https://www.mapbox.com/mapbox-gl-js/api/#EventData">clicking here</a>.
+			</p>
+			</section>
+	</div>
+</div>
+</div>

@@ -1,0 +1,61 @@
+body{
+margin:0px;
+overflow: hidden;
+font-family: Open Sans;
+height:100vh;
+}
+a{
+	/* background: #494E58; */
+/* padding: 5px; */
+color: #67B6FF;
+text-decoration: none;
+font-weight: 100;
+/* font-size: 12px; */
+}
+
+#container{
+	display: flex;
+	flex-direction: row;
+}
+
+#container .item {
+	flex-grow: 1;
+    flex: 100;
+    /* flex-basis: 50% !important; */
+    /* min-width: 50% !important; */
+    display: inline-block;
+}
+.card{
+	padding: 5% 10%;
+	box-sizing: border-box;
+}
+.card h1{
+	font-size: 40px;
+}
+.card h2{
+	font-size: 25px;
+}
+.card h3{
+	font-size: 18px;
+}
+.card pre{
+	tab-size:1 !important;
+	margin:0px !important;
+
+}
+.card pre code{
+	border-radius:5px;
+}
+.card section{
+	margin-top: 80px;
+	margin-left: 40px;
+
+}
+
+#tutorial{
+	max-width: 700px;
+}
+#tutorial.item{
+	overflow: scroll;
+	height: 100%;
+}

@@ -1,0 +1,12 @@
+
+
+mapbox-gl-map .mapboxgl-canvas-container{
+	width: 100%;
+	height:100%;
+}
+
+mapbox-gl-map .mapboxgl-canvas{
+	width:100%;
+	height:100%;
+
+}
