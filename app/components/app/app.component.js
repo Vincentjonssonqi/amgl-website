@@ -14,20 +14,13 @@ var highlight_1 = require('../../directives/highlight');
 var AppComponent = (function () {
     function AppComponent() {
         var _this = this;
+        this.self = this;
         this.mapStyleToken = "mapbox://styles/vincentjonssonqi/cioso8gpc001eecnio7hl48hi"; //"mapbox://styles/vincentjonssonqi/cioslshdw001pdpnj49vixc5z";//"mapbox://styles/vincentjonssonqi/cio41s4sw005sb5nipesob1an";//"mapbox://styles/mapbox/streets-v9";
         this.mapPosition = {
             zoom: 15.5,
             bearing: 45,
             pitch: 45,
             center: [-122.4214763, 37.7542969]
-        };
-        this.events = {
-            click: function (eventData) {
-                console.log(eventData);
-            },
-            zoomend: function (eventData) {
-                console.log("zoom", eventData);
-            }
         };
         mapboxgl.accessToken = "pk.eyJ1IjoidmluY2VudGpvbnNzb25xaSIsImEiOiJIVVByOWJnIn0.Dq2xmRmGDRSDvLjyrbVjzA";
         setTimeout(function () {
@@ -41,6 +34,10 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.didScrollContent = function (e) {
         console.log(e);
+    };
+    AppComponent.prototype.mapDidGetClickedAction = function (eventData) {
+        this.mapPosition.center = eventData.lngLat.toArray();
+        console.log(eventData);
     };
     AppComponent = __decorate([
         core_1.Component({

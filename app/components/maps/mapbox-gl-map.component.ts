@@ -85,7 +85,7 @@ export class MapboxGlMap{
 		"mbpitch",
 	];
 	constructor(el:ElementRef){
-
+		var self = this;
 		this.id = "map-" + Math.random()*1000000;
 		el.nativeElement.id = this.id;
 
@@ -98,19 +98,20 @@ export class MapboxGlMap{
 			pitch: this.pitch
 		};
 
-var self = this;
+
 		this.map = new mapboxgl.Map(mapInitObject);
-		for var index in this.eventPropNames{
-			var name = this.eventPropNames[index];
+		this.eventPropNames.forEach(function(name){
 			console.log(name,name.replace("mb",""))
-			this.map.on(name.replace("mb",""),function(eventData){
-				console.log(self[name],eventData);
+			self.map.on(name.replace("mb",""),function(eventData){
 				self[name].emit(eventData);
 			});
+		});
 
-		}
+
+
+
 	}
-	
+
 	ngOnChanges(changes: {[propertyName: string]: SimpleChange}){
 		console.log(changes);
 

@@ -7,6 +7,7 @@ import {HighlightCodeDirective} from '../../directives/highlight';
 	directives:[MapboxGlMap,HighlightCodeDirective]
 })
 export class AppComponent {
+	self = this
 	mapStyleToken:String = "mapbox://styles/vincentjonssonqi/cioso8gpc001eecnio7hl48hi";//"mapbox://styles/vincentjonssonqi/cioslshdw001pdpnj49vixc5z";//"mapbox://styles/vincentjonssonqi/cio41s4sw005sb5nipesob1an";//"mapbox://styles/mapbox/streets-v9";
 	mapPosition:Any = {
 		zoom:15.5,
@@ -14,15 +15,7 @@ export class AppComponent {
 		pitch:45,
 		center:[-122.4214763,37.7542969]
 	};
-	events = {
-		click:function(eventData){
-			console.log(eventData);
-		},
-		zoomend:function(eventData){
-			console.log("zoom",eventData);
-		}
-
-	};
+	
 	constructor(){
 		mapboxgl.accessToken = "pk.eyJ1IjoidmluY2VudGpvbnNzb25xaSIsImEiOiJIVVByOWJnIn0.Dq2xmRmGDRSDvLjyrbVjzA";
 		setTimeout(() => {
@@ -38,4 +31,9 @@ export class AppComponent {
 		console.log(e);
 	}
 
+	mapDidGetClickedAction(eventData){
+			this.mapPosition.center = eventData.lngLat.toArray()
+			console.log(eventData);
+
+	}
 }
